@@ -11,6 +11,34 @@ function getRandomNumber(min, max) {
   return randomNumber;
 }
 
+btnNo.addEventListener("touchstart", (event) => {
+  const containerHeight = container.getBoundingClientRect().height;
+  const containerWidth = container.getBoundingClientRect().width;
+  const btnHeight = btnNo.getBoundingClientRect().height;
+  const btnWidth = btnNo.getBoundingClientRect().width;
+  const btnTop = btnNo.getBoundingClientRect().top;
+  const btnLeft = btnNo.getBoundingClientRect().left;
+
+  let newTop = btnTop;
+  let newLeft = btnLeft;
+  while (Math.abs(newTop - btnTop) < containerHeight / 3) {
+    newTop = getRandomNumber(0, containerHeight - btnHeight);
+  }
+
+  while (Math.abs(newLeft - btnLeft) < containerWidth / 3) {
+    newLeft = getRandomNumber(0, containerWidth - btnWidth);
+  }
+
+  btnNo.style.top = Math.floor(newTop) + "px";
+  btnNo.style.left = Math.floor(newLeft) + "px";
+});
+
+btnNo.addEventListener("touchend", (event) => {
+  // Stop moving the button
+  btnNo.style.transition = "none";
+});
+
+
 btnNo.addEventListener("mouseover", (event) => {
   const containerHeight = container.getBoundingClientRect().height;
   const containerWidth = container.getBoundingClientRect().width;
@@ -32,6 +60,13 @@ btnNo.addEventListener("mouseover", (event) => {
   btnNo.style.top = Math.floor(newTop) + "px";
   btnNo.style.left = Math.floor(newLeft) + "px";
 });
+
+function moveButton(event) {
+  var newX = Math.random() * window.innerWidth;
+  var newY = Math.random() * window.innerHeight;
+  noButton.style.left = newX + 'px';
+  noButton.style.top = newY + 'px';
+}
 
 btnYes.addEventListener("click", (e) => {
   btnNo.classList.add("hide");
